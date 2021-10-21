@@ -3,4 +3,7 @@
     <string name="fab_content_desc">Creër bijeenkomst</string>
     <string name="fab_label">Bijeenkomst</string>
     <string name="delete_content_desc">Verwijder</string>
+    <string name="signin">Inloggen</string>
+    <string name="logout">Uitloggen</string>
+    <string name="google_login_disclaimer">Deze app maakt gebruik van Google Auth\nvoor de opslag van data in Firebase.\n\nLogin om de app te gebruiken.</string>
 </resources>

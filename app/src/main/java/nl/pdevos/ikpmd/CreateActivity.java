@@ -16,11 +16,9 @@ public class CreateActivity extends AppCompatActivity {
 
     public void deleteClicked(View v) {
         finish();
-//        startActivity(new Intent(this, MainActivity.class));
     }
 
     public void saveClicked(View v) {
         finish();
-//        startActivity(new Intent(this, MainActivity.class));
     }
 }
