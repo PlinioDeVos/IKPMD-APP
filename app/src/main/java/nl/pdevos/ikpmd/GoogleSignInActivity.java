@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class GoogleSignInActivity extends AppCompatActivity {
+    private User user;
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -30,6 +31,17 @@ public class GoogleSignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_sign_in);
 
+        setupUser();
+        configureOptions();
+
+    }
+
+    private void setupUser() {
+        user = User.getInstance();
+        user.setUser(mAuth.getCurrentUser());
+    }
+
+    private void configureOptions() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -73,9 +85,10 @@ public class GoogleSignInActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        setupUser();
 
         // Wanneer de gebruiker al bestaat (dus de gebruiker is ingelogd), breng de gebruiker naar de Main.
-        if (mAuth.getCurrentUser() != null) {
+        if (user.getUser() != null) {
             finish();
         }
     }
@@ -86,7 +99,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
     }
 
     public void signinClicked(View v) {
-        Log.d("signinClicked", "Kwam hier");
         resultLauncher.launch(new Intent(mGoogleSignInClient.getSignInIntent()));
     }
 }

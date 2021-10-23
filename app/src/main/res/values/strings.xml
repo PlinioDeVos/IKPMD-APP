@@ -6,4 +6,9 @@
     <string name="signin">Inloggen</string>
     <string name="logout">Uitloggen</string>
     <string name="google_login_disclaimer">Deze app maakt gebruik van Google Auth\nvoor de opslag van data in Firebase.\n\nLogin om de app te gebruiken.</string>
+    <string name="name_placeholder">Name</string>
+    <string name="name_desc">Vul de naam in van de bijeenkomst:</string>
+    <string name="date_desc">Selecteer de datum van de bijeenkomst:</string>
+    <string name="buttons_desc">Bijeenkomst aanmaken?</string>
+    <string name="name_is_empty_msg">Vul eerst een naam in!</string>
 </resources>
