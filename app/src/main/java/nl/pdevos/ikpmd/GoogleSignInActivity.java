@@ -33,7 +33,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
         setupUser();
         configureOptions();
-
     }
 
     private void setupUser() {
