@@ -15,31 +15,25 @@ public class CreateActivity extends AppCompatActivity {
     private CalendarView calendarView;
     private EditText nameEditText;
     private String selectedDate;
+    private DateCreator dateCreator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
-        nameEditText = (EditText) findViewById(R.id.name_edittext);
+        dateCreator = new DateCreator();
 
+        nameEditText = (EditText) findViewById(R.id.name_edittext);
         calendarView = (CalendarView) findViewById(R.id.date_view);
-        selectedDate = getStringFromDate(new Date(calendarView.getDate()));
+
+        selectedDate = dateCreator.getStringFromDate(new Date(calendarView.getDate()));
         setupDateChangeListener();
     }
 
     private void setupDateChangeListener() {
         calendarView.setOnDateChangeListener((calendarView, year, month, dayOfMonth) ->
-                selectedDate = getStringFromYearMonthDay(year, month, dayOfMonth));
-    }
-
-    private String getStringFromDate(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(date);
-    }
-
-    private String getStringFromYearMonthDay(int year, int month, int dayOfMonth) {
-        return String.format("%d/%d/%d", dayOfMonth, month, year);
+                selectedDate = dateCreator.getStringFromYearMonthDay(year, month + 1, dayOfMonth));
     }
 
     private void saveMeeting() {

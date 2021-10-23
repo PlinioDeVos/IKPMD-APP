@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">IKPMD - Stoplicht Evaluatie App</string>
+    <string name="date_picker_desc">Selecteer een datum:</string>
+    <string name="date_default">01/01/2021</string>
     <string name="fab_content_desc">Creër bijeenkomst</string>
     <string name="fab_label">Bijeenkomst</string>
     <string name="delete_content_desc">Verwijder</string>
+    <string name="save_content_desc">Opslaan</string>
     <string name="signin">Inloggen</string>
     <string name="logout">Uitloggen</string>
     <string name="google_login_disclaimer">Deze app maakt gebruik van Google Auth\nvoor de opslag van data in Firebase.\n\nLogin om de app te gebruiken.</string>
-    <string name="name_placeholder">Name</string>
+    <string name="name_placeholder">Naam</string>
     <string name="name_desc">Vul de naam in van de bijeenkomst:</string>
     <string name="date_desc">Selecteer de datum van de bijeenkomst:</string>
     <string name="buttons_desc">Bijeenkomst aanmaken?</string>

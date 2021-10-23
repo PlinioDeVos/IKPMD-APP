@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center|start"
             android:layout_margin="16dp"
-            android:contentDescription="@string/delete_content_desc"
+            android:contentDescription="@string/save_content_desc"
             android:onClick="saveClicked"
             app:backgroundTint="@color/green"
             app:srcCompat="@drawable/checkmark" />
