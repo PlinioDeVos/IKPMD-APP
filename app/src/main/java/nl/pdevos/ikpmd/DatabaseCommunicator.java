@@ -3,7 +3,6 @@ package nl.pdevos.ikpmd;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,27 +27,26 @@ public class DatabaseCommunicator {
         meetingsRef.child(meeting_id + "/date").setValue(date);
     }
 
-    public ArrayList<Meeting> getMeetingsFromDate(String selectedDate) {
+    public void readMeetingData(FirebaseCallback firebaseCallback) {
         ArrayList<Meeting> meetings = new ArrayList<>();
 
-        meetingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot data : snapshot.getChildren()) {
-                    Meeting meeting = getMeetingFromData(data);
-
-                    if (meeting.getDate().equals(selectedDate))
-                        meetings.add(meeting);
+                    meetings.add(getMeetingFromData(data));
                 }
+
+                firebaseCallback.onCallback(meetings);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d("Firebase", error.getMessage());
             }
-        });
+        };
 
-        return meetings;
+        meetingsRef.addListenerForSingleValueEvent(valueEventListener);
     }
 
     private Meeting getMeetingFromData(DataSnapshot data) {

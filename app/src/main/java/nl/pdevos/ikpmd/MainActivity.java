@@ -4,39 +4,75 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
+    private DatabaseCommunicator databaseCommunicator;
+
     private DatePickerDialog datePickerDialog;
     private Button date_picker;
     private DateCreator dateCreator;
+
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private MeetingRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(this, GoogleSignInActivity.class));
 
-        dateCreator = new DateCreator();
-        date_picker = (Button) findViewById(R.id.date_picker);
-        date_picker.setText(dateCreator.getCurrentDate());
+        databaseCommunicator = new DatabaseCommunicator();
+
         setupDatePicker();
+        setupRecyclerView();
     }
 
     private void setupDatePicker() {
+        dateCreator = new DateCreator();
+        date_picker = (Button) findViewById(R.id.date_picker);
+        date_picker.setText(dateCreator.getCurrentDate());
+
         DatePickerDialog.OnDateSetListener dateSetListener = (datePicker, year, month, dayOfMonth) -> {
             String date = dateCreator.getStringFromYearMonthDay(year, month + 1, dayOfMonth);
             date_picker.setText(date);
+            loadMeetingItems();
         };
 
         createDatePickerDialog(dateSetListener);
+    }
+
+    private void setupRecyclerView() {
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        loadMeetingItems();
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+    }
+
+    private void loadMeetingItems() {
+        databaseCommunicator.readMeetingData(meetings -> {
+            ArrayList<Meeting> results = new ArrayList<>();
+            String selectedDate = (String) date_picker.getText();
+
+            for (Meeting meeting : meetings) {
+                if (meeting.getDate().equals(selectedDate))
+                    results.add(meeting);
+            }
+
+            adapter = new MeetingRecyclerViewAdapter(results);
+            recyclerView.setAdapter(adapter);
+        });
     }
 
     private void createDatePickerDialog(DatePickerDialog.OnDateSetListener dateSetListener) {
@@ -55,5 +91,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void datePickerClicked(View v) {
         datePickerDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Dit zorgt er voor dat de gebruiker niet terug kan met de back button
     }
 }

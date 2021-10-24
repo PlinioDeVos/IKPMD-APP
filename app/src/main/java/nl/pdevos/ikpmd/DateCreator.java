@@ -19,7 +19,6 @@ public class DateCreator {
     }
 
     public String getCurrentDate() {
-        Date date = new Date();
-        return dateFormat.format(date);
+        return dateFormat.format(new Date());
     }
 }

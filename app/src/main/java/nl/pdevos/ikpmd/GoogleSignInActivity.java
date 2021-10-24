@@ -3,7 +3,6 @@ package nl.pdevos.ikpmd;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,14 +21,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class GoogleSignInActivity extends AppCompatActivity {
+    private FirebaseAuth mAuth;
     private User user;
-    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_sign_in);
+
+        mAuth = FirebaseAuth.getInstance();
 
         setupUser();
         configureOptions();
@@ -73,7 +74,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Als het inloggen lukt, laat toast bericht zien en breng de gebruiker terug
                         Toast.makeText(GoogleSignInActivity.this, "Inloggen gelukt", Toast.LENGTH_SHORT).show();
-                        finish();
+                        startActivity(new Intent(this, MainActivity.class));
                     } else {
                         // Als het inloggen mislukt, laat toast bericht zien
                         Toast.makeText(GoogleSignInActivity.this, "Inloggen mislukt!", Toast.LENGTH_SHORT).show();
@@ -84,17 +85,11 @@ public class GoogleSignInActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        setupUser();
 
         // Wanneer de gebruiker al bestaat (dus de gebruiker is ingelogd), breng de gebruiker naar de Main.
         if (user.getUser() != null) {
-            finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        // Dit zorgt er voor dat de gebruiker niet terug kan met de back button
     }
 
     public void signinClicked(View v) {

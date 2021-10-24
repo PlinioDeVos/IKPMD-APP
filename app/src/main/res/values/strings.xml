@@ -11,6 +11,9 @@
     <string name="google_login_disclaimer">Deze app maakt gebruik van Google Auth\nvoor de opslag van data in Firebase.\n\nLogin om de app te gebruiken.</string>
     <string name="name_placeholder">Naam</string>
     <string name="name_desc">Vul de naam in van de bijeenkomst:</string>
+    <string name="date">Datum</string>
+    <string name="no_color">Geen kleur</string>
+    <string name="item_button">Evaluaren</string>
     <string name="date_desc">Selecteer de datum van de bijeenkomst:</string>
     <string name="buttons_desc">Bijeenkomst aanmaken?</string>
     <string name="name_is_empty_msg">Vul eerst een naam in!</string>
