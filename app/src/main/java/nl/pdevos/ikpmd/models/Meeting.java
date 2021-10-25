@@ -1,6 +1,8 @@
-package nl.pdevos.ikpmd;
+package nl.pdevos.ikpmd.models;
 
-public class Meeting {
+import java.io.Serializable;
+
+public class Meeting implements Serializable {
     private String id;
     private String name;
     private String date;

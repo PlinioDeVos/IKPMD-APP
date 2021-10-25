@@ -1,4 +1,4 @@
-package nl.pdevos.ikpmd;
+package nl.pdevos.ikpmd.database;
 
 import android.util.Log;
 
@@ -12,12 +12,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import nl.pdevos.ikpmd.models.Meeting;
+
 public class DatabaseCommunicator {
-    private FirebaseDatabase database;
-    private DatabaseReference meetingsRef;
+    private final DatabaseReference meetingsRef;
 
     public DatabaseCommunicator() {
-        database = FirebaseDatabase.getInstance("https://ikpmd-dec9b-default-rtdb.europe-west1.firebasedatabase.app/");
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://ikpmd-dec9b-default-rtdb.europe-west1.firebasedatabase.app/");
         meetingsRef = database.getReference("users/" + User.getInstance().getUid() + "/meetings");
     }
 
@@ -64,11 +65,12 @@ public class DatabaseCommunicator {
         return data.child(child).getValue(String.class);
     }
 
-    public void updateMeetingFromId(String id) {
+    public void updateMeetingFromId(String meeting_id, String color, String commentary) {
+        if (color != null)
+            meetingsRef.child(meeting_id + "/color").setValue(color);
 
-    }
-
-    public void getMeetingFromId(String id) {
-
+        if (commentary != null)
+            if (!commentary.trim().isEmpty())
+                meetingsRef.child(meeting_id + "/commentary").setValue(commentary);
     }
 }

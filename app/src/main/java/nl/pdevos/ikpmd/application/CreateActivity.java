@@ -1,4 +1,4 @@
-package nl.pdevos.ikpmd;
+package nl.pdevos.ikpmd.application;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Date;
+
+import nl.pdevos.ikpmd.database.DatabaseCommunicator;
+import nl.pdevos.ikpmd.models.DateCreator;
+import nl.pdevos.ikpmd.R;
 
 public class CreateActivity extends AppCompatActivity {
     private CalendarView calendarView;
@@ -38,8 +42,8 @@ public class CreateActivity extends AppCompatActivity {
     private void saveMeeting() {
         String name = nameEditText.getText().toString().trim();
 
-        DatabaseCommunicator dbCommunicator = new DatabaseCommunicator();
-        dbCommunicator.createMeeting(name, selectedDate);
+        DatabaseCommunicator databaseCommunicator = new DatabaseCommunicator();
+        databaseCommunicator.createMeeting(name, selectedDate);
     }
 
     public void deleteClicked(View v) {
@@ -50,7 +54,7 @@ public class CreateActivity extends AppCompatActivity {
         String name = nameEditText.getText().toString();
 
         if (name.trim().isEmpty()) {
-            Toast.makeText(CreateActivity.this, R.string.name_is_empty_msg, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.name_is_empty_msg, Toast.LENGTH_SHORT).show();
             return;
         }
 

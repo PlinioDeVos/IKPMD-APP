@@ -1,4 +1,4 @@
-package nl.pdevos.ikpmd;
+package nl.pdevos.ikpmd.application;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +19,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import nl.pdevos.ikpmd.R;
+import nl.pdevos.ikpmd.database.User;
 
 public class GoogleSignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;

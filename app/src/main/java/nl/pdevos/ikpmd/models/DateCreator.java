@@ -1,4 +1,4 @@
-package nl.pdevos.ikpmd;
+package nl.pdevos.ikpmd.models;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

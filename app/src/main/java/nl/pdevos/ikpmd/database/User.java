@@ -1,10 +1,10 @@
-package nl.pdevos.ikpmd;
+package nl.pdevos.ikpmd.database;
 
 import com.google.firebase.auth.FirebaseUser;
 
 public class User {
     private static User user;
-    private FirebaseUser firebaseUser;
+    private static FirebaseUser firebaseUser;
 
     private User() {}
 

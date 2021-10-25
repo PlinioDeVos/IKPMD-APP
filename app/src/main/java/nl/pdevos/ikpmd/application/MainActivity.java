@@ -1,4 +1,4 @@
-package nl.pdevos.ikpmd;
+package nl.pdevos.ikpmd.application;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -14,6 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import nl.pdevos.ikpmd.database.DatabaseCommunicator;
+import nl.pdevos.ikpmd.models.DateCreator;
+import nl.pdevos.ikpmd.models.Meeting;
+import nl.pdevos.ikpmd.adapters.MeetingRecyclerViewAdapter;
+import nl.pdevos.ikpmd.R;
+
 public class MainActivity extends AppCompatActivity {
     private DatabaseCommunicator databaseCommunicator;
 
@@ -22,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private DateCreator dateCreator;
 
     private RecyclerView recyclerView;
-    private LinearLayoutManager layoutManager;
     private MeetingRecyclerViewAdapter adapter;
 
     @Override
@@ -54,9 +59,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
-        loadMeetingItems();
-
-        layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
     }
 
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     results.add(meeting);
             }
 
-            adapter = new MeetingRecyclerViewAdapter(results);
+            adapter = new MeetingRecyclerViewAdapter(this, results);
             recyclerView.setAdapter(adapter);
         });
     }
@@ -96,5 +99,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // Dit zorgt er voor dat de gebruiker niet terug kan met de back button
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadMeetingItems();
     }
 }
