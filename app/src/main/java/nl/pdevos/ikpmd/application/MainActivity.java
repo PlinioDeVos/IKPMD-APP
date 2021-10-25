@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupDatePicker() {
         dateCreator = new DateCreator();
-        date_picker = (Button) findViewById(R.id.date_picker);
+        date_picker = findViewById(R.id.date_picker);
         date_picker.setText(dateCreator.getCurrentDate());
 
         DatePickerDialog.OnDateSetListener dateSetListener = (datePicker, year, month, dayOfMonth) -> {

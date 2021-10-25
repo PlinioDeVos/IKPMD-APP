@@ -46,7 +46,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
             holder.itemColor.setText(meeting.getColor());
             holder.itemColor.setTextColor(colorConverter.getIntColorFromColorName(meeting.getColor()));
         }
-
     }
 
     @Override

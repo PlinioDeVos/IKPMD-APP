@@ -33,12 +33,12 @@ public class EvaluateActivity extends AppCompatActivity {
         databaseCommunicator = new DatabaseCommunicator();
         meeting = (Meeting) getIntent().getSerializableExtra("meeting");
 
-        nameView = (TextView) findViewById(R.id.name_view);
-        commentaryEditText = (EditText) findViewById(R.id.commentary_edittext);
-        colorView = (TextView) findViewById(R.id.color_view);
+        nameView = findViewById(R.id.name_view);
+        commentaryEditText = findViewById(R.id.commentary_edittext);
+        colorView = findViewById(R.id.color_view);
 
-        createTextChangedListener();
         loadMeetingValues();
+        createTextChangedListener();
     }
 
     private void loadMeetingValues() {
